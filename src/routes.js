@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import DeveloperController from '../controllers/DeveloperController';
+import DeveloperController from '../src/controllers/DeveloperController';
 
 const routes = new Router();
 

@@ -12,7 +12,7 @@ const Listagem = () => {
   const findDeveloper = async () => {
     const response = await api.get('/developers');
 
-    setListDev(response.data.response.rows)
+    setListDev(response.data)
   }
 
   const handleInputChange = (e) => {
@@ -20,11 +20,11 @@ const Listagem = () => {
     setQuery(value.toUpperCase());
   };
 
-  const destroyDeveloper = async (id) => {
+  const deleteDeveloper = async (id) => {
     const response = await api.delete(`/developers/${id}`);
 
     if (response.status === 204) {
-      window.alert("Removido com Sucesso !");
+      window.alert("Removido com Sucesso!");
       findDeveloper(query)
     }
   }
@@ -40,7 +40,7 @@ const Listagem = () => {
       <Form>
         <Row>
           <Form.Group as={Col}>
-            <h1 className="text-dark my-4">Listagem </h1>{" "}
+            <h1 className="text-dark my-4">Listagem Developers</h1>{" "}
           </Form.Group>
           <Form.Group
             as={Col}
@@ -76,15 +76,15 @@ const Listagem = () => {
           {listDev.length > 0 &&
             listDev.map((dev) => {
               return (
-                <tr key={dev.id}>
-                  <td>{dev.nome}</td>
-                  <td>{dev.sexo}</td>
-                  <td>{dev.idade}</td>
+                <tr key={dev._id}>
+                  <td>{dev.name}</td>
+                  <td>{dev.sex}</td>
+                  <td>{dev.age}</td>
                   <td>{dev.hobby}</td>
-                  <td>{formateDate(dev.datanascimento)}</td>
+                  <td>{dev.birthDate.split("T")[0]}</td>
                   <td className="d-flex justify-content-center gap-2">
                     <Link
-                      to={`/cadastrar/${dev.id}`}
+                      to={`/cadastrar/${dev._id}`}
                       style={{ textDecoration: "none", color: "#08f" }}
                     >
                       <Button
@@ -100,8 +100,8 @@ const Listagem = () => {
                       type="button"
                       size="sm"
                       onClick={() => {
-                        if (window.confirm(`Deseja Deletar o Desenvolvedor ${dev.nome} ?`)) {
-                          destroyDeveloper(dev.id)
+                        if (window.confirm(`Deseja Excluir o Desenvolvedor ${dev.name} ?`)) {
+                          deleteDeveloper(dev._id)
                         }
                       }}
                     >

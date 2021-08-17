@@ -1,15 +1,16 @@
 import express from 'express';
 import routes from './routes';
 import cors from 'cors';
-import '../config/database';
+import '../src/config/database';
 
 class App {
     constructor(){
         this.server = express();
-
+        
+        this.cors();
         this.middlewares();
         this.routes();
-        this.cors();
+        
     }
 
     middlewares() {

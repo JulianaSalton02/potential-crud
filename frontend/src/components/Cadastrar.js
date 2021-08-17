@@ -15,14 +15,14 @@ function Cadastrar() {
 
   useEffect(() => {
     if (id) {
-      api.get(`/developers/${id}`).then(({ data }) => {
-        const { response } = data
+      api.get(`/developers/${id}`).then(({data }) => {
+       
         setValues({
-          name: response.name,
-          age: response.age,
-          sex: response.sex,
-          birthDate: response.birthDate,
-          hobby: response.hobby
+          name: data.name,
+          age: data.age,
+          sex: data.sex,
+          birthDate: data.birthDate.split("T")[0],
+          hobby: data.hobby
         })
       })
     }
@@ -35,18 +35,19 @@ function Cadastrar() {
 
     if (!id) {
       const response = await api.post(`/developers`, data);
+      console.log(response)
       if (response.status !== 201) {
         window.alert("Erro ao Cadastrar!");
         return
       }
-      window.alert(response.data.mensagem);
+      window.alert(`O usuario ${response.data.name} foi cadastrado com sucesso!`);
     } else {
       const response = await api.put(`/developers/${id}`, data);
       if (response.status !== 200) {
-        window.alert("Erro ao Cadastrar!");
+        window.alert("Erro ao Cadastrar!.....");
         return
       }
-      window.alert(response.data.mensagem);
+      window.alert(`O usuario ${response.data.name} foi atualizado com sucesso!`);
     }
     historyPush();
   };
@@ -77,10 +78,10 @@ function Cadastrar() {
           <Form.Group as={Col} controlId="formGridAge">
             <Form.Label>Idade</Form.Label>
             <Form.Control
-              name="idade"
+              name="age"
               type="number"
               min="0"
-              value={values.idade || ''}
+              value={values.age || ''}
               onChange={handleInputChange}
               placeholder="Digite sua idade"
               required

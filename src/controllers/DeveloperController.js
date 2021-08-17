@@ -56,12 +56,15 @@ class DeveloperController{
             name, sex, age, birthDate, hobby
         });
 
-        return res.json(developer)
+        return res.status(201).json(developer)
     }
 
     async delete(req, res) {
         const {id} = req.params;
 
+        if (!id) {
+            return res.status(400).json({error:'nao deu vacilao'})
+        }
         const developer = await Developer.findById(id);
 
         if(!developer) {
