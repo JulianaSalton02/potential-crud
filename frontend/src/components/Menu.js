@@ -9,11 +9,11 @@ function Menu() {
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand className="ms-3">
-          <IoIosPeople size="30px" />
+          <IoIosPeople size="45px" />
         </Navbar.Brand>
-        <Nav className="me-auto">
+        <Nav className="me-right">
           <Nav.Link>
-            <Link to="/cadastrar" style={{ textDecoration: "none", color: "#fff" }} >
+            <Link to="/cadastrar" style={{ textDecoration: "none", color: "#fff"}}>
               Cadastrar
             </Link>
           </Nav.Link>

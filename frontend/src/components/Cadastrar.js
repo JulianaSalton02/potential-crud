@@ -18,9 +18,9 @@ function Cadastrar() {
       api.get(`/developers/${id}`).then(({ data }) => {
         const { response } = data
         setValues({
-          name: response.nome,
-          age: response.idade,
-          sex: response.sexo,
+          name: response.name,
+          age: response.age,
+          sex: response.sex,
           birthDate: response.birthDate,
           hobby: response.hobby
         })
@@ -36,14 +36,14 @@ function Cadastrar() {
     if (!id) {
       const response = await api.post(`/developers`, data);
       if (response.status !== 201) {
-        window.alert("Erro ao Cadastrar o Desenvolvedor!");
+        window.alert("Erro ao Cadastrar!");
         return
       }
       window.alert(response.data.mensagem);
     } else {
       const response = await api.put(`/developers/${id}`, data);
       if (response.status !== 200) {
-        window.alert("Erro ao Cadastrar o Desenvolvedor!");
+        window.alert("Erro ao Cadastrar!");
         return
       }
       window.alert(response.data.mensagem);
@@ -58,16 +58,16 @@ function Cadastrar() {
   return (
     <Container>
       <h1 className="text-dark my-4">
-        {id ? "Alterar" : "Cadastrar"}  Dev
+        {id ? "Alterar" : "Cadastrar"}  Developers
       </h1>
       <Form onSubmit={handleSubmit} >
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridName">
             <Form.Label>Nome</Form.Label>
             <Form.Control
-              name="nome"
+              name="name"
               type="text"
-              value={values.nome || ''}
+              value={values.name || ''}
               onChange={handleInputChange}
               placeholder="Digite seu nome"
               required
@@ -92,8 +92,8 @@ function Cadastrar() {
           <Form.Group as={Col} controlId="formGridBirthDate">
             <Form.Label>Data de Nascimento</Form.Label>
             <Form.Control
-              name="datanascimento"
-              value={values.datanascimento || ''}
+              name="birthDate"
+              value={values.birthDate|| ''}
               onChange={handleInputChange}
               type="date"
               placeholder="Digite sua data de nascimento"
@@ -107,20 +107,20 @@ function Cadastrar() {
               <Form.Check
                 type="radio"
                 inline
-                name="sexo"
+                name="sex"
                 label="Feminino"
                 value="F"
                 onChange={handleInputChange}
-                checked={values.sexo === "F"}
+                checked={values.sex === "F"}
               />
               <Form.Check
                 type="radio"
                 inline
-                name="sexo"
+                name="sex"
                 label="Masculino"
                 value="M"
                 onChange={handleInputChange}
-                checked={values.sexo === "M"}
+                checked={values.sex === "M"}
               />
             </Col>
           </Form.Group>
@@ -143,12 +143,11 @@ function Cadastrar() {
             variant="outline-danger"
             type="button"
             className="me-3"
-            onClick={() => historyPush()}
-          >
+            onClick={() => historyPush()}>
             Cancelar
           </Button>
           <Button variant="outline-success" type="submit">
-            Enviar
+            Salvar Dados
           </Button>
         </Col>
       </Form>
