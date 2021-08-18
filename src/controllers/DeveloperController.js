@@ -1,8 +1,7 @@
 import Developer from "../models/developer";
 
 class DeveloperController{
-
-    //listar todas as categorias 
+ 
     async index (req, res) {
         const developers = await Developer.find({});
 
@@ -11,7 +10,12 @@ class DeveloperController{
 
     async show(req, res) {
         const {id} = req.params;
+        
         const developer = await Developer.findById(id);
+
+        if (!id) {
+            return res.status(400).json({error:'Developer does not found'})
+        }
 
         if(!developer) {
             return res.status(400).json({error:'Developer does not found'});
@@ -26,6 +30,10 @@ class DeveloperController{
        
 
         const developer = await Developer.findById(id);
+
+        if (!id) {
+            return res.status(400).json({error:'Developer does not found'})
+        }
 
         if(!developer) {
             return res.status(400).json({error:'Developer does not found'});
@@ -63,7 +71,7 @@ class DeveloperController{
         const {id} = req.params;
 
         if (!id) {
-            return res.status(400).json({error:'nao deu vacilao'})
+            return res.status(400).json({error:'Developer does not found'})
         }
         const developer = await Developer.findById(id);
 
