@@ -1,6 +1,6 @@
 # potential-crud
 
-Projeto de um potencial crud, desenvolvido para o processo seletivo da Gzin Tech.
+Projeto de um potencial crud, desenvolvido para o processo seletivo da Gazin Tech.
 
 # Objetivo
 
