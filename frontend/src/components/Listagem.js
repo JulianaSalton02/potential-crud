@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
-import { BiSearchAlt2 } from "react-icons/bi";
 import { BsFillTrashFill, BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import api from '../services/api';
@@ -33,7 +32,7 @@ const Listagem = () => {
     findDeveloper(query)
   }, [query])
 
-  const formateDate = (data) => new Date(data).toLocaleDateString();
+  // const formateDate = (data) => new Date(data).toLocaleDateString();
 
   return (
     <Container>
@@ -42,23 +41,7 @@ const Listagem = () => {
           <Form.Group as={Col}>
             <h1 className="text-dark my-4">Listagem Developers</h1>{" "}
           </Form.Group>
-          <Form.Group
-            as={Col}
-            className="mb-2 pt-4 pb-3 d-flex"
-            controlId="formBasicCheckbox"
-          >
-            <Form.Control
-              name="buscar"
-              type="text"
-              label="Buscar"
-              placeholder="Buscar.."
-              value={query}
-              onChange={handleInputChange}
-            />
-            <Button variant="light" className="ms-3" type="submit">
-              <BiSearchAlt2 />
-            </Button>
-          </Form.Group>
+          
         </Row>
       </Form>
       <Table striped bordered hover>
